@@ -36,12 +36,19 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>50</y>
+     <y>40</y>
      <width>171</width>
-     <height>171</height>
+     <height>181</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="playback_layout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Playback Devices</string>
+      </property>
+     </widget>
+    </item>
     <item>
      <spacer name="verticalSpacer">
       <property name="orientation">
@@ -107,12 +114,19 @@
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>50</y>
+     <y>40</y>
      <width>171</width>
-     <height>171</height>
+     <height>181</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="record_layout">
+    <item>
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Recording Devices</string>
+      </property>
+     </widget>
+    </item>
     <item>
      <spacer name="verticalSpacer_4">
       <property name="orientation">
@@ -173,32 +187,6 @@
      </spacer>
     </item>
    </layout>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>40</y>
-     <width>61</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Playback Devices</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>40</y>
-     <width>71</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Recording Devices</string>
-   </property>
   </widget>
  </widget>
  <resources/>
