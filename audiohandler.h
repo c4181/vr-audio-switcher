@@ -2,10 +2,10 @@
 #define AUDIOHANDLER_H
 
 
-class audiohandler
+class AudioHandler
 {
 public:
-    audiohandler();
+    AudioHandler();
 };
 
 #endif // AUDIOHANDLER_H

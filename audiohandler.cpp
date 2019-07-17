@@ -1,6 +1,6 @@
 #include "audiohandler.h"
 
-audiohandler::audiohandler()
+AudioHandler::AudioHandler()
 {
 
 }
