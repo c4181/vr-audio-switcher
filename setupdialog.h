@@ -4,8 +4,11 @@
 #include <map>
 #include <QDialog>
 #include <QStringList>
+#include <QString>
+#include <string>
 
 using std::map;
+using std::string;
 
 namespace Ui {
 class SetupDialog;
@@ -20,6 +23,7 @@ public:
     ~SetupDialog();
 
 private:
+    void ListAudioDevices();
     Ui::SetupDialog *ui;
     map<char[], char[]> audio_device_map_;
     QStringList audio_device_list_;

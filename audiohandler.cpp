@@ -66,7 +66,7 @@ const IID IID_IMMDeviceEnumerator = __uuidof(IMMDeviceEnumerator);
                        PKEY_Device_FriendlyName, &varName);
         EXIT_ON_ERROR(hr)
 
-        // Print endpoint friendly name and endpoint ID.
+        // Add endpoint friendly name and endpoint ID to a map.
         pair <char[], char[]> device;
         device = make_pair(varName.pwszVal, pwszID);
         audio_devices_.insert(device);

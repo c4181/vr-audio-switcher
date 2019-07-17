@@ -7,6 +7,8 @@ SetupDialog::SetupDialog(QWidget *parent) :
     ui(new Ui::SetupDialog)
 {
     ui->setupUi(this);
+    ListAudioDevices();
+    ui->vr_playback_combo_box->addItems(audio_device_list_);
 }
 
 SetupDialog::~SetupDialog()
@@ -17,7 +19,12 @@ SetupDialog::~SetupDialog()
 void ListAudioDevice() {
     AudioHandler audio;
 
-    audio_device_map_ = audio.GetAudioDevices();
+    map<char[], char[]> audio_device_map_ = audio.GetAudioDevices();
+    QStringList audio_device_list_;
 
-
+    for (map<char[], char[]>::iterator it=audio_device_map_.begin(); it!=audio_device_map_.end(); ++it) {
+        string device_name(it->first);
+        QString q_device_name = QString::fromStdString(device_name);
+        audio_device_list_.append(q_device_name);
+    }
 }
