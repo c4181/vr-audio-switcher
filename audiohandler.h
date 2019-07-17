@@ -5,10 +5,11 @@
 #include <utility>
 
 #include <mmdeviceapi.h>
+#include <functiondiscoverykeys_devpkey.h>
 
-using std::map
-using std::make_pair
-using std::pair
+using std::map;
+using std::make_pair;
+using std::pair;
 
 class AudioHandler
 {

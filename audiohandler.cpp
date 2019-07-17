@@ -5,7 +5,7 @@ AudioHandler::AudioHandler()
 
 }
 
-map<char[], char[]> AudioHandler::GetAudioDevices {
+map<char[], char[]> AudioHandler::GetAudioDevices() {
 #define EXIT_ON_ERROR(hres)  \
               if (FAILED(hres)) { goto Exit; }
 #define SAFE_RELEASE(punk)  \
@@ -15,8 +15,6 @@ map<char[], char[]> AudioHandler::GetAudioDevices {
 const CLSID CLSID_MMDeviceEnumerator = __uuidof(MMDeviceEnumerator);
 const IID IID_IMMDeviceEnumerator = __uuidof(IMMDeviceEnumerator);
 
-void PrintEndpointNames()
-{
     HRESULT hr = S_OK;
     IMMDeviceEnumerator *pEnumerator = NULL;
     IMMDeviceCollection *pCollection = NULL;
@@ -69,9 +67,9 @@ void PrintEndpointNames()
         EXIT_ON_ERROR(hr)
 
         // Print endpoint friendly name and endpoint ID.
-        pair device<char[], char[]>;
+        pair <char[], char[]> device;
         device = make_pair(varName.pwszVal, pwszID);
-        audio_devices_.push_back(device);
+        audio_devices_.insert(device);
 
         CoTaskMemFree(pwszID);
         pwszID = NULL;
@@ -81,7 +79,7 @@ void PrintEndpointNames()
     }
     SAFE_RELEASE(pEnumerator)
     SAFE_RELEASE(pCollection)
-    return;
+    return audio_devices_;
 
 Exit:
     printf("Error!\n");
@@ -91,4 +89,4 @@ Exit:
     SAFE_RELEASE(pEndpoint)
     SAFE_RELEASE(pProps)
 }
-}
+
