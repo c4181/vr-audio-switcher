@@ -25,11 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        audiohandler.cpp \
         main.cpp \
         mainwindow.cpp \
         setupdialog.cpp
 
 HEADERS += \
+        audiohandler.h \
         mainwindow.h \
         setupdialog.h
 
