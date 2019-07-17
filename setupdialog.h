@@ -1,7 +1,11 @@
 #ifndef SETUPDIALOG_H
 #define SETUPDIALOG_H
 
+#include <map>
 #include <QDialog>
+#include <QStringList>
+
+using std::map;
 
 namespace Ui {
 class SetupDialog;
@@ -17,6 +21,8 @@ public:
 
 private:
     Ui::SetupDialog *ui;
+    map<char[], char[]> audio_device_map_;
+    QStringList audio_device_list_;
 };
 
 #endif // SETUPDIALOG_H
