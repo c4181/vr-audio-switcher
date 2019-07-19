@@ -1,11 +1,16 @@
 #include "audiohandler.h"
 
-AudioHandler::AudioHandler()
-{
+#include <map>
 
-}
+using std::map;
 
-map<char[], char[]> AudioHandler::GetAudioDevices() {
+AudioHandler::AudioHandler() {
+};
+
+AudioHandler::~AudioHandler() {
+};
+
+map<string, string> AudioHandler::GetAudioDevices() {
 #define EXIT_ON_ERROR(hres)  \
               if (FAILED(hres)) { goto Exit; }
 #define SAFE_RELEASE(punk)  \
@@ -67,8 +72,17 @@ const IID IID_IMMDeviceEnumerator = __uuidof(IMMDeviceEnumerator);
         EXIT_ON_ERROR(hr)
 
         // Add endpoint friendly name and endpoint ID to a map.
-        pair <char[], char[]> device;
-        device = make_pair(varName.pwszVal, pwszID);
+        pair <string, string> device;
+        char* device_name_mb = new char[wcslen(varName.pwszVal)];
+//        const wchar_t* device_name_wc[] = varName.pwszVal;
+        int ret = wcstombs(device_name_mb, varName.pwszVal, wcslen(varName.pwszVal));
+
+        char* device_id_mb = new char[wcslen(pwszID)];
+        ret = wcstombs(device_id_mb, pwszID, wcslen(pwszID));
+
+        string device_name (device_name_mb);
+        string device_id (device_id_mb);
+        device = make_pair(device_name, device_id);
         audio_devices_.insert(device);
 
         CoTaskMemFree(pwszID);

@@ -1,11 +1,14 @@
 #ifndef SETUPDIALOG_H
 #define SETUPDIALOG_H
 
-#include <map>
 #include <QDialog>
 #include <QStringList>
 #include <QString>
 #include <string>
+
+#include <map>
+
+#include "audiohandler.h"
 
 using std::map;
 using std::string;
@@ -25,7 +28,7 @@ public:
 private:
     void ListAudioDevices();
     Ui::SetupDialog *ui;
-    map<char[], char[]> audio_device_map_;
+    map<string, string> audio_device_map_;
     QStringList audio_device_list_;
 };
 
