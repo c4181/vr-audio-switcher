@@ -1,11 +1,5 @@
 #include "setupdialog.h"
 #include "ui_setupdialog.h"
-#include "audiohandler.h"
-
-#include <map>
-
-using std::map;
-
 
 SetupDialog::SetupDialog(QWidget *parent) :
     QDialog(parent),
@@ -22,7 +16,5 @@ SetupDialog::~SetupDialog()
 }
 
 void SetupDialog::ListAudioDevices() {
-    CDevicesManager devices;
-
 
 }

@@ -33,6 +33,7 @@ SOURCES += \
 HEADERS += \
         audiohandler.h \
         audiomanager.h \
+        mainwindow.h \
         setupdialog.h
 
 FORMS += \

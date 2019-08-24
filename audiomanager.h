@@ -3,6 +3,7 @@
 
 #include <mmdeviceapi.h>
 #include <functiondiscoverykeys_devpkey.h>
+#include <combaseapi.h>
 #include <string>
 #include <winerror.h>
 #include <vector>
