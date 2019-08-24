@@ -9,6 +9,7 @@
 #include <map>
 
 #include "audiohandler.h"
+#include "DevicesManager.h"
 
 using std::map;
 using std::string;

@@ -1,7 +1,6 @@
 #include "setupdialog.h"
 #include "ui_setupdialog.h"
 #include "audiohandler.h"
-#include "audiohandler.cpp"
 
 #include <map>
 
@@ -23,13 +22,7 @@ SetupDialog::~SetupDialog()
 }
 
 void SetupDialog::ListAudioDevices() {
-    AudioHandler audio;
+    CDevicesManager devices;
 
-    //audio_device_map_ = audio.GetAudioDevices();
 
-    for (map<string, string>::iterator it=audio_device_map_.begin(); it!=audio_device_map_.end(); ++it) {
-        string device_name(it->first);
-        QString q_device_name = QString::fromStdString(device_name);
-        audio_device_list_.append(q_device_name);
-    }
 }
