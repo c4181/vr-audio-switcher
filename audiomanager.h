@@ -11,6 +11,8 @@
 #include <winerror.h>
 #include <vector>
 
+using std::vector;
+
 struct Device;
 
 struct AudioDevice {
@@ -26,11 +28,13 @@ public:
     AudioManager();
     HRESULT InitializeDeviceEnumerator();
     HRESULT LoadAudioDevices();
+    vector<AudioDevice> GetAudioDevices();
 
 private:
     IMMDeviceEnumerator *pEnum;
-    std::vector<AudioDevice> devices;
+    vector<AudioDevice> devices;
     void AddDevice(IMMDevice *device, LPCWSTR pwszID);
+    void Init();
 };
 
 #endif // AUDIOMANAGER_H

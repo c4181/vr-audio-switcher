@@ -12,6 +12,11 @@
 #endif
 
 AudioManager::AudioManager() {
+    Init();
+}
+
+void AudioManager::Init() {
+    LoadAudioDevices();
 }
 
 HRESULT AudioManager::InitializeDeviceEnumerator()
@@ -77,3 +82,9 @@ void AudioManager::AddDevice (IMMDevice *device, LPCWSTR pwszID) {
         SAFE_RELEASE(pProps)
 
 }
+
+vector<AudioDevice> AudioManager::GetAudioDevices() {
+    return devices;
+}
+
+
