@@ -1,9 +1,12 @@
 #ifndef AUDIOMANAGER_H
 #define AUDIOMANAGER_H
 
+#pragma comment(lib, "Ole32.lib")
+
 #include <mmdeviceapi.h>
 #include <functiondiscoverykeys_devpkey.h>
 #include <combaseapi.h>
+#include <objbase.h>
 #include <string>
 #include <winerror.h>
 #include <vector>
