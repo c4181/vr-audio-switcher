@@ -26,11 +26,9 @@ void AudioManager::Init() {
     LoadRecordingDevices();
 }
 
-HRESULT AudioManager::InitializeDeviceEnumerator()
-{
+HRESULT AudioManager::InitializeDeviceEnumerator() {
     HRESULT hr = S_OK;
-    if(!pEnum)
-    {
+    if(!pEnum) {
         hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL,
             CLSCTX_ALL, __uuidof(IMMDeviceEnumerator), (void**)&pEnum);
     }
@@ -118,7 +116,6 @@ void AudioManager::AddPlaybackDevice (IMMDevice *device, LPCWSTR pwszID) {
     Exit:
         PropVariantClear(&varName);
         SAFE_RELEASE(pProps)
-
 }
 
 void AudioManager::AddRecordingDevice (IMMDevice *device, LPCWSTR pwszID) {
@@ -140,7 +137,6 @@ void AudioManager::AddRecordingDevice (IMMDevice *device, LPCWSTR pwszID) {
     Exit:
         PropVariantClear(&varName);
         SAFE_RELEASE(pProps)
-
 }
 
 vector<AudioDevice> AudioManager::GetPlaybackDevices() {
