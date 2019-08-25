@@ -7,7 +7,8 @@ SetupDialog::SetupDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     ListAudioDevices();
-    ui->vr_playback_combo_box->addItems(audio_device_list_);
+    ui->vr_playback_combo_box->addItems(playback_device_list_);
+    ui->desktop_playback_combo_box->addItems(playback_device_list_);
 }
 
 SetupDialog::~SetupDialog()
@@ -20,19 +21,19 @@ void SetupDialog::ListAudioDevices() {
 
     devices = audio_devices.GetAudioDevices();
 
-    QString test = ConvertString(devices.at(0).deviceName);
+    for(ulong i = 0; i < devices.size(); ++i) {
+        QString new_device = ConvertString(devices.at(i).deviceName);
+        playback_device_list_.append(new_device);
+    }
 
 }
 
 QString SetupDialog::ConvertString(wstring wdevice_name) {
-    const wchar_t* wchar_name = wdevice_name.c_str();
-    char buffer[32];
-    int ret;
 
-    ret = wcstombs(buffer, wchar_name, sizeof (buffer));
-    if (ret==32) buffer[31] = '\0';
+    string sdevice_name;
+    sdevice_name = string(wdevice_name.begin(), wdevice_name.end());
 
-    QString ret_qstring;
+    QString ret_qstring = QString::fromStdString(sdevice_name);
 
     return ret_qstring;
 }

@@ -32,7 +32,7 @@ private:
     vector<AudioDevice> devices;
     Ui::SetupDialog *ui;
     map<string, string> audio_device_map_;
-    QStringList audio_device_list_;
+    QStringList playback_device_list_;
     QString ConvertString(wstring);
 };
 

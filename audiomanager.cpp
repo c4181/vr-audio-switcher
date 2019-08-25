@@ -11,11 +11,17 @@
     { (punk) -> Release(); (punk) = nullptr; }
 #endif
 
-AudioManager::AudioManager() {
+AudioManager::AudioManager() :pEnum(nullptr) {
     Init();
 }
-
+/*
+AudioManager::~AudioManager() {
+    ReleaseDeviceEnumerator();
+    delete client;
+}
+*/
 void AudioManager::Init() {
+    InitializeDeviceEnumerator();
     LoadAudioDevices();
 }
 
