@@ -27,13 +27,17 @@ class AudioManager
 public:
     AudioManager();
     HRESULT InitializeDeviceEnumerator();
-    HRESULT LoadAudioDevices();
-    vector<AudioDevice> GetAudioDevices();
+    HRESULT LoadPlaybackDevices();
+    HRESULT LoadRecordingDevices();
+    vector<AudioDevice> GetPlaybackDevices();
+    vector<AudioDevice> GetRecordingDevices();
 
 private:
     IMMDeviceEnumerator *pEnum;
-    vector<AudioDevice> devices;
-    void AddDevice(IMMDevice *device, LPCWSTR pwszID);
+    vector<AudioDevice> playback_devices_;
+    vector<AudioDevice> recording_devices_;
+    void AddPlaybackDevice(IMMDevice *device, LPCWSTR pwszID);
+    void AddRecordingDevice(IMMDevice *device, LPCWSTR pwszID);
     void Init();
 };
 

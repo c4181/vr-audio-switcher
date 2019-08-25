@@ -22,7 +22,8 @@ AudioManager::~AudioManager() {
 */
 void AudioManager::Init() {
     InitializeDeviceEnumerator();
-    LoadAudioDevices();
+    LoadPlaybackDevices();
+    LoadRecordingDevices();
 }
 
 HRESULT AudioManager::InitializeDeviceEnumerator()
@@ -36,8 +37,8 @@ HRESULT AudioManager::InitializeDeviceEnumerator()
     return hr;
 }
 
-HRESULT AudioManager::LoadAudioDevices() {
-    devices.clear();
+HRESULT AudioManager::LoadPlaybackDevices() {
+    playback_devices_.clear();
     IMMDeviceCollection *devicesCollection = NULL;
     IMMDevice *device = NULL;
     LPWSTR pwszID = NULL;
@@ -53,7 +54,7 @@ HRESULT AudioManager::LoadAudioDevices() {
 
         hr = device -> GetId(&pwszID);
         RETURN_ON_ERROR(hr)
-        AddDevice(device, pwszID);
+        AddPlaybackDevice(device, pwszID);
 
         CoTaskMemFree(pwszID);
         pwszID = NULL;
@@ -67,7 +68,38 @@ HRESULT AudioManager::LoadAudioDevices() {
         return hr;
 }
 
-void AudioManager::AddDevice (IMMDevice *device, LPCWSTR pwszID) {
+HRESULT AudioManager::LoadRecordingDevices() {
+    recording_devices_.clear();
+    IMMDeviceCollection *devicesCollection = NULL;
+    IMMDevice *device = NULL;
+    LPWSTR pwszID = NULL;
+    HRESULT hr = pEnum -> EnumAudioEndpoints(eCapture, DEVICE_STATE_ACTIVE, &devicesCollection);
+    RETURN_ON_ERROR(hr)
+    UINT count;
+    hr = devicesCollection -> GetCount(&count);
+    RETURN_ON_ERROR(hr)
+
+    for (UINT i = 0; i < count; ++i) {
+        hr = devicesCollection -> Item(i, &device);
+        RETURN_ON_ERROR(hr)
+
+        hr = device -> GetId(&pwszID);
+        RETURN_ON_ERROR(hr)
+        AddRecordingDevice(device, pwszID);
+
+        CoTaskMemFree(pwszID);
+        pwszID = NULL;
+        SAFE_RELEASE(device);
+    }
+
+    Exit:
+        CoTaskMemFree(pwszID);
+        SAFE_RELEASE(devicesCollection)
+        SAFE_RELEASE(device)
+        return hr;
+}
+
+void AudioManager::AddPlaybackDevice (IMMDevice *device, LPCWSTR pwszID) {
     IPropertyStore *pProps = NULL;
     AudioDevice audio_device;
     HRESULT hr = device -> OpenPropertyStore(STGM_READ, &pProps);
@@ -81,7 +113,7 @@ void AudioManager::AddDevice (IMMDevice *device, LPCWSTR pwszID) {
     audio_device.deviceID.assign(pwszID);
     audio_device.deviceName.assign(varName.pwszVal);
 
-    devices.push_back(audio_device);
+    playback_devices_.push_back(audio_device);
 
     Exit:
         PropVariantClear(&varName);
@@ -89,8 +121,33 @@ void AudioManager::AddDevice (IMMDevice *device, LPCWSTR pwszID) {
 
 }
 
-vector<AudioDevice> AudioManager::GetAudioDevices() {
-    return devices;
+void AudioManager::AddRecordingDevice (IMMDevice *device, LPCWSTR pwszID) {
+    IPropertyStore *pProps = NULL;
+    AudioDevice audio_device;
+    HRESULT hr = device -> OpenPropertyStore(STGM_READ, &pProps);
+    RETURN_ON_ERROR(hr)
+
+    PROPVARIANT varName;
+    PropVariantInit(&varName);
+    hr = pProps -> GetValue(PKEY_Device_FriendlyName, &varName);
+    RETURN_ON_ERROR(hr)
+
+    audio_device.deviceID.assign(pwszID);
+    audio_device.deviceName.assign(varName.pwszVal);
+
+    recording_devices_.push_back(audio_device);
+
+    Exit:
+        PropVariantClear(&varName);
+        SAFE_RELEASE(pProps)
+
 }
 
+vector<AudioDevice> AudioManager::GetPlaybackDevices() {
+    return playback_devices_;
+}
+
+vector<AudioDevice> AudioManager::GetRecordingDevices() {
+    return recording_devices_;
+}
 

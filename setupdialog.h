@@ -28,11 +28,12 @@ public:
     ~SetupDialog();
 
 private:
-    void ListAudioDevices();
-    vector<AudioDevice> devices;
     Ui::SetupDialog *ui;
-    map<string, string> audio_device_map_;
+    void ListAudioDevices();
+    vector<AudioDevice> playback_devices_;
+    vector<AudioDevice> recording_devices_;
     QStringList playback_device_list_;
+    QStringList recording_device_list_;
     QString ConvertString(wstring);
 };
 

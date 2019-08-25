@@ -31,7 +31,6 @@ SOURCES += \
         setupdialog.cpp
 
 HEADERS += \
-        audiohandler.h \
         audiomanager.h \
         mainwindow.h \
         setupdialog.h

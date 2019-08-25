@@ -9,6 +9,8 @@ SetupDialog::SetupDialog(QWidget *parent) :
     ListAudioDevices();
     ui->vr_playback_combo_box->addItems(playback_device_list_);
     ui->desktop_playback_combo_box->addItems(playback_device_list_);
+    ui->vr_recording_combo_box->addItems(recording_device_list_);
+    ui->desktop_recording_combo_box->addItems(recording_device_list_);
 }
 
 SetupDialog::~SetupDialog()
@@ -16,18 +18,28 @@ SetupDialog::~SetupDialog()
     delete ui;
 }
 
+// Gets all active playback and recording devices and adds them to a QString List
+// to populate the Ui comboboxes
 void SetupDialog::ListAudioDevices() {
     AudioManager audio_devices;
 
-    devices = audio_devices.GetAudioDevices();
+    playback_devices_ = audio_devices.GetPlaybackDevices();
+    recording_devices_ = audio_devices.GetRecordingDevices();
 
-    for(ulong i = 0; i < devices.size(); ++i) {
-        QString new_device = ConvertString(devices.at(i).deviceName);
+    for(ulong i = 0; i < playback_devices_.size(); ++i) {
+        QString new_device = ConvertString(playback_devices_.at(i).deviceName);
         playback_device_list_.append(new_device);
+    }
+
+    for(ulong i = 0; i < recording_devices_.size(); ++i) {
+        QString new_device = ConvertString(recording_devices_.at(i).deviceName);
+        recording_device_list_.append(new_device);
     }
 
 }
 
+// Converts the PKEY_Device_Friendly_Name from a std::wstring
+// to a std::string and then returns a QString
 QString SetupDialog::ConvertString(wstring wdevice_name) {
 
     string sdevice_name;
