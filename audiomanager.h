@@ -13,8 +13,6 @@
 
 using std::vector;
 
-struct Device;
-
 struct AudioDevice {
     std::wstring deviceID;
     std::wstring deviceName;
