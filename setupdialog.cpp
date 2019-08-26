@@ -101,6 +101,6 @@ AudioDevice SetupDialog::GetDesktopRecordingDevice() {
 }
 
 void SetupDialog::ErrorFindingDevice(QString device) {
-    QMessageBox::critical(this, "Error Finding Device", "Error: Could not find" + device, QMessageBox::Ok, QMessageBox::Ok);
+    QMessageBox::critical(this, "Error Finding Device", "Error: Could not find " + device, QMessageBox::Ok, QMessageBox::Ok);
     QCoreApplication::exit(1);
 }
