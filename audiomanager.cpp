@@ -24,8 +24,8 @@ void AudioManager::Init() {
 HRESULT AudioManager::InitializeDeviceEnumerator() {
     HRESULT hr = S_OK;
     if(!pEnum) {
-        hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL,
-            CLSCTX_ALL, __uuidof(IMMDeviceEnumerator), (void**)&pEnum);
+        hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), nullptr,
+            CLSCTX_ALL, __uuidof(IMMDeviceEnumerator), reinterpret_cast<void**>(&pEnum));
     }
     return hr;
 }
@@ -33,9 +33,9 @@ HRESULT AudioManager::InitializeDeviceEnumerator() {
 // Discovers all active playback devices and their information
 HRESULT AudioManager::LoadPlaybackDevices() {
     playback_devices_.clear();
-    IMMDeviceCollection *devicesCollection = NULL;
-    IMMDevice *device = NULL;
-    LPWSTR pwszID = NULL;
+    IMMDeviceCollection *devicesCollection = nullptr;
+    IMMDevice *device = nullptr;
+    LPWSTR pwszID = nullptr;
     HRESULT hr = pEnum -> EnumAudioEndpoints(eRender, DEVICE_STATE_ACTIVE, &devicesCollection);
     RETURN_ON_ERROR(hr)
     UINT count;
@@ -51,7 +51,7 @@ HRESULT AudioManager::LoadPlaybackDevices() {
         AddPlaybackDevice(device, pwszID);
 
         CoTaskMemFree(pwszID);
-        pwszID = NULL;
+        pwszID = nullptr;
         SAFE_RELEASE(device);
     }
 
@@ -65,9 +65,9 @@ HRESULT AudioManager::LoadPlaybackDevices() {
 // Discovers all active recording devices and their information
 HRESULT AudioManager::LoadRecordingDevices() {
     recording_devices_.clear();
-    IMMDeviceCollection *devicesCollection = NULL;
-    IMMDevice *device = NULL;
-    LPWSTR pwszID = NULL;
+    IMMDeviceCollection *devicesCollection = nullptr;
+    IMMDevice *device = nullptr;
+    LPWSTR pwszID = nullptr;
     HRESULT hr = pEnum -> EnumAudioEndpoints(eCapture, DEVICE_STATE_ACTIVE, &devicesCollection);
     RETURN_ON_ERROR(hr)
     UINT count;
@@ -83,7 +83,7 @@ HRESULT AudioManager::LoadRecordingDevices() {
         AddRecordingDevice(device, pwszID);
 
         CoTaskMemFree(pwszID);
-        pwszID = NULL;
+        pwszID = nullptr;
         SAFE_RELEASE(device);
     }
 
@@ -97,7 +97,7 @@ HRESULT AudioManager::LoadRecordingDevices() {
 // Adds discovered playback devices and their information to a vector
 // of AudioDevices
 void AudioManager::AddPlaybackDevice (IMMDevice *device, LPCWSTR pwszID) {
-    IPropertyStore *pProps = NULL;
+    IPropertyStore *pProps = nullptr;
     AudioDevice audio_device;
     HRESULT hr = device -> OpenPropertyStore(STGM_READ, &pProps);
     RETURN_ON_ERROR(hr)
@@ -120,7 +120,7 @@ void AudioManager::AddPlaybackDevice (IMMDevice *device, LPCWSTR pwszID) {
 // Adds discovered recording devices and their information to a vector
 // of AudioDevices
 void AudioManager::AddRecordingDevice (IMMDevice *device, LPCWSTR pwszID) {
-    IPropertyStore *pProps = NULL;
+    IPropertyStore *pProps = nullptr;
     AudioDevice audio_device;
     HRESULT hr = device -> OpenPropertyStore(STGM_READ, &pProps);
     RETURN_ON_ERROR(hr)
