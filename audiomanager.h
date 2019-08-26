@@ -26,9 +26,6 @@ class AudioManager
 {
 public:
     AudioManager();
-    HRESULT InitializeDeviceEnumerator();
-    HRESULT LoadPlaybackDevices();
-    HRESULT LoadRecordingDevices();
     vector<AudioDevice> GetPlaybackDevices();
     vector<AudioDevice> GetRecordingDevices();
 
@@ -38,6 +35,9 @@ private:
     vector<AudioDevice> recording_devices_;
     void AddPlaybackDevice(IMMDevice *device, LPCWSTR pwszID);
     void AddRecordingDevice(IMMDevice *device, LPCWSTR pwszID);
+    HRESULT InitializeDeviceEnumerator();
+    HRESULT LoadPlaybackDevices();
+    HRESULT LoadRecordingDevices();
     void Init();
 };
 

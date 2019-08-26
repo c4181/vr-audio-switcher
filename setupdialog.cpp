@@ -3,8 +3,7 @@
 
 SetupDialog::SetupDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::SetupDialog)
-{
+    ui(new Ui::SetupDialog) {
     ui->setupUi(this);
     ListAudioDevices();
     ui->vr_playback_combo_box->addItems(playback_device_list_);
@@ -13,8 +12,7 @@ SetupDialog::SetupDialog(QWidget *parent) :
     ui->desktop_recording_combo_box->addItems(recording_device_list_);
 }
 
-SetupDialog::~SetupDialog()
-{
+SetupDialog::~SetupDialog() {
     delete ui;
 }
 
@@ -48,4 +46,52 @@ QString SetupDialog::ConvertString(wstring wdevice_name) {
     QString ret_qstring = QString::fromStdString(sdevice_name);
 
     return ret_qstring;
+}
+
+AudioDevice SetupDialog::GetVrPlaybackDevice() {
+   QString quser_selection = ui->vr_playback_combo_box->currentText();
+   string suser_selection = quser_selection.toStdString();
+   wstring wuser_selection = wstring(suser_selection.begin(), suser_selection.end());
+
+   for(uint i = 0; i < playback_devices_.size(); ++i) {
+       if (playback_devices_.at(i).deviceName == wuser_selection) {
+           return playback_devices_.at(i);
+       }
+   }
+}
+
+AudioDevice SetupDialog::GetVrRecordingDevice() {
+    QString quser_selection = ui->vr_recording_combo_box->currentText();
+    string suser_selection = quser_selection.toStdString();
+    wstring wuser_selection = wstring(suser_selection.begin(), suser_selection.end());
+
+    for(uint i = 0; i < recording_devices_.size(); ++i) {
+        if (recording_devices_.at(i).deviceName == wuser_selection) {
+            return recording_devices_.at(i);
+        }
+    }
+}
+
+AudioDevice SetupDialog::GetDesktopPlaybackDevice() {
+    QString quser_selection = ui->desktop_playback_combo_box->currentText();
+    string suser_selection = quser_selection.toStdString();
+    wstring wuser_selection = wstring(suser_selection.begin(), suser_selection.end());
+
+    for(uint i = 0; i < playback_devices_.size(); ++i) {
+        if (playback_devices_.at(i).deviceName == wuser_selection) {
+            return playback_devices_.at(i);
+        }
+    }
+}
+
+AudioDevice SetupDialog::GetDesktopRecordingDevice() {
+    QString quser_selection = ui->desktop_recording_combo_box->currentText();
+    string suser_selection = quser_selection.toStdString();
+    wstring wuser_selection = wstring(suser_selection.begin(), suser_selection.end());
+
+    for(uint i = 0; i < recording_devices_.size(); ++i) {
+        if (recording_devices_.at(i).deviceName == wuser_selection) {
+            return recording_devices_.at(i);
+        }
+    }
 }

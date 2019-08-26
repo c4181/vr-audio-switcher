@@ -26,6 +26,10 @@ class SetupDialog : public QDialog
 public:
     explicit SetupDialog(QWidget *parent = nullptr);
     ~SetupDialog();
+    AudioDevice GetVrPlaybackDevice();
+    AudioDevice GetVrRecordingDevice();
+    AudioDevice GetDesktopPlaybackDevice();
+    AudioDevice GetDesktopRecordingDevice();
 
 private:
     Ui::SetupDialog *ui;
