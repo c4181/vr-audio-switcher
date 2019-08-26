@@ -30,6 +30,7 @@ HRESULT AudioManager::InitializeDeviceEnumerator() {
     return hr;
 }
 
+// Discovers all active playback devices and their information
 HRESULT AudioManager::LoadPlaybackDevices() {
     playback_devices_.clear();
     IMMDeviceCollection *devicesCollection = NULL;
@@ -61,6 +62,7 @@ HRESULT AudioManager::LoadPlaybackDevices() {
         return hr;
 }
 
+// Discovers all active recording devices and their information
 HRESULT AudioManager::LoadRecordingDevices() {
     recording_devices_.clear();
     IMMDeviceCollection *devicesCollection = NULL;
@@ -92,6 +94,8 @@ HRESULT AudioManager::LoadRecordingDevices() {
         return hr;
 }
 
+// Adds discovered playback devices and their information to a vector
+// of AudioDevices
 void AudioManager::AddPlaybackDevice (IMMDevice *device, LPCWSTR pwszID) {
     IPropertyStore *pProps = NULL;
     AudioDevice audio_device;
@@ -113,6 +117,8 @@ void AudioManager::AddPlaybackDevice (IMMDevice *device, LPCWSTR pwszID) {
         SAFE_RELEASE(pProps)
 }
 
+// Adds discovered recording devices and their information to a vector
+// of AudioDevices
 void AudioManager::AddRecordingDevice (IMMDevice *device, LPCWSTR pwszID) {
     IPropertyStore *pProps = NULL;
     AudioDevice audio_device;
