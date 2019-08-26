@@ -2,5 +2,6 @@
     <qresource prefix="/icons">
         <file>Resources/VR_Audio_Switcher_Large.png</file>
         <file>Resources/VR_Audio_Switcher_small.png</file>
+        <file>Resources/VR_Audio_Switcher_No_Text.png</file>
     </qresource>
 </RCC>

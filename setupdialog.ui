@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>Audio Setup</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/Resources/VR_Audio_Switcher_No_Text.png</normaloff>:/icons/Resources/VR_Audio_Switcher_No_Text.png</iconset>
+  </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
@@ -189,7 +193,9 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

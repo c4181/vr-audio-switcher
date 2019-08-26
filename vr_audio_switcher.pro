@@ -47,6 +47,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     Resources/VR_Audio_Switcher_Large.png \
+    Resources/VR_Audio_Switcher_No_Text.png \
     Resources/VR_Audio_Switcher_small.png
 
 RESOURCES += \

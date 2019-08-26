@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icons/Resources/VR_Audio_Switcher_small.png</normaloff>:/icons/Resources/VR_Audio_Switcher_small.png</iconset>
+    <normaloff>:/icons/Resources/VR_Audio_Switcher_No_Text.png</normaloff>:/icons/Resources/VR_Audio_Switcher_No_Text.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="gridLayoutWidget">
@@ -75,7 +75,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
