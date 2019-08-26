@@ -68,7 +68,6 @@ AudioDevice SetupDialog::GetVrRecordingDevice() {
 
     for(uint i = 0; i < recording_devices_.size(); ++i) {
         if (recording_devices_.at(i).deviceName == wuser_selection) {
-            ErrorFindingDevice(quser_selection);
             return recording_devices_.at(i);
         }
     }
