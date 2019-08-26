@@ -39,6 +39,9 @@ private slots:
     void on_setupMenu_triggered();
     void on_switch_to_vr_button_clicked();
     void on_switch_to_desktop_button_clicked();
+    void on_switch_to_vr_menu_triggered();
+    void on_switch_to_desktop_menu_triggered();
+    void on_exit_menu_triggered();
 };
 
 

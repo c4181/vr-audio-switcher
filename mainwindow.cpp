@@ -54,3 +54,17 @@ void MainWindow::on_switch_to_desktop_button_clicked() {
     SetDevice(desktop_playback_device.deviceID);
     SetDevice(desktop_recording_device.deviceID);
 }
+
+void MainWindow::on_switch_to_vr_menu_triggered() {
+    SetDevice(vr_playback_device.deviceID);
+    SetDevice(vr_recording_device.deviceID);
+}
+
+void MainWindow::on_switch_to_desktop_menu_triggered() {
+    SetDevice(desktop_playback_device.deviceID);
+    SetDevice(desktop_recording_device.deviceID);
+}
+
+void MainWindow::on_exit_menu_triggered() {
+    QApplication::quit();
+}
