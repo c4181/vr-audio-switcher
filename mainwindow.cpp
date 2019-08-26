@@ -32,8 +32,8 @@ void MainWindow::on_setupMenu_triggered() {
 HRESULT MainWindow::SetDevice(const wstring& id) {
     IPolicyConfig *pPolicyConfig;
 
-    HRESULT hr = CoCreateInstance(__uuidof(CPolicyConfigClient), NULL, CLSCTX_ALL,
-                                  __uuidof(IPolicyConfig), (LPVOID*)&pPolicyConfig);
+    HRESULT hr = CoCreateInstance(__uuidof(CPolicyConfigClient), nullptr, CLSCTX_ALL,
+                                  __uuidof(IPolicyConfig), reinterpret_cast<LPVOID*>(&pPolicyConfig));
 
     if (SUCCEEDED(hr)) {
         hr = pPolicyConfig->SetDefaultEndpoint(id.c_str(), eConsole);
