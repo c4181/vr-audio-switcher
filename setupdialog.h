@@ -2,6 +2,7 @@
 #define SETUPDIALOG_H
 
 #include <QDialog>
+#include <QMessageBox>
 #include <QStringList>
 #include <QString>
 #include <string>
@@ -31,6 +32,7 @@ public:
 private:
     Ui::SetupDialog *ui;
     void ListAudioDevices();
+    void ErrorFindingDevice(QString);
     vector<AudioDevice> playback_devices_;
     vector<AudioDevice> recording_devices_;
     QStringList playback_device_list_;

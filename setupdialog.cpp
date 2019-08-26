@@ -58,6 +58,7 @@ AudioDevice SetupDialog::GetVrPlaybackDevice() {
            return playback_devices_.at(i);
        }
    }
+   ErrorFindingDevice(quser_selection);
 }
 
 AudioDevice SetupDialog::GetVrRecordingDevice() {
@@ -70,6 +71,7 @@ AudioDevice SetupDialog::GetVrRecordingDevice() {
             return recording_devices_.at(i);
         }
     }
+    ErrorFindingDevice(quser_selection);
 }
 
 AudioDevice SetupDialog::GetDesktopPlaybackDevice() {
@@ -82,6 +84,7 @@ AudioDevice SetupDialog::GetDesktopPlaybackDevice() {
             return playback_devices_.at(i);
         }
     }
+    ErrorFindingDevice(quser_selection);
 }
 
 AudioDevice SetupDialog::GetDesktopRecordingDevice() {
@@ -94,4 +97,10 @@ AudioDevice SetupDialog::GetDesktopRecordingDevice() {
             return recording_devices_.at(i);
         }
     }
+    ErrorFindingDevice(quser_selection);
+}
+
+void SetupDialog::ErrorFindingDevice(QString device) {
+    QMessageBox::critical(this, "My Application", "Error: Could not find" + device, QMessageBox::Ok, QMessageBox::Ok);
+    QCoreApplication::exit(1);
 }
