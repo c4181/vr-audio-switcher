@@ -68,3 +68,8 @@ void MainWindow::on_switch_to_desktop_menu_triggered() {
 void MainWindow::on_exit_menu_triggered() {
     QApplication::quit();
 }
+
+void MainWindow::on_about_menu_triggered() {
+    AboutDialog dialog(this);
+    dialog.exec();
+}

@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        aboutdialog.cpp \
         audiomanager.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -32,11 +33,13 @@ SOURCES += \
 
 HEADERS += \
         PolicyConfig.h \
+        aboutdialog.h \
         audiomanager.h \
         mainwindow.h \
         setupdialog.h
 
 FORMS += \
+        aboutdialog.ui \
         mainwindow.ui \
         setupdialog.ui
 

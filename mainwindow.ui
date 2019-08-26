@@ -75,7 +75,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>21</height>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -91,7 +91,7 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionAbout"/>
+    <addaction name="about_menu"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
@@ -125,7 +125,7 @@
     <string>&amp;Setup</string>
    </property>
   </action>
-  <action name="actionAbout">
+  <action name="about_menu">
    <property name="text">
     <string>&amp;About VR Audio Switcher</string>
    </property>

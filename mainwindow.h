@@ -9,6 +9,7 @@
 
 #include "PolicyConfig.h"
 #include "setupdialog.h"
+#include "aboutdialog.h"
 
 using std::wstring;
 
@@ -42,6 +43,7 @@ private slots:
     void on_switch_to_vr_menu_triggered();
     void on_switch_to_desktop_menu_triggered();
     void on_exit_menu_triggered();
+    void on_about_menu_triggered();
 };
 
 
