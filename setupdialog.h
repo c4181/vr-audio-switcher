@@ -6,11 +6,8 @@
 #include <QString>
 #include <string>
 
-#include <map>
-
 #include "audiomanager.h"
 
-using std::map;
 using std::string;
 using std::wstring;
 using std::vector;
