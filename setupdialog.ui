@@ -209,5 +209,24 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>SetupDialog</receiver>
+   <slot>save_on_dialog_accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>279</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>save_on_dialog_accept()</slot>
+ </slots>
 </ui>
