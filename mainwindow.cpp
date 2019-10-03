@@ -13,8 +13,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
 void MainWindow::on_setupMenu_triggered() {
   SetupDialog dialog(this);
   int dialog_code = dialog.exec();

@@ -26,6 +26,7 @@ CONFIG += c++11
 
 SOURCES += \
         aboutdialog.cpp \
+        animatedbutton.cpp \
         audiomanager.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
 HEADERS += \
         PolicyConfig.h \
         aboutdialog.h \
+        animatedbutton.h \
         audiomanager.h \
         mainwindow.h \
         setupdialog.h
