@@ -6,12 +6,17 @@
 #include <combaseapi.h>
 #include <string>
 #include <QMainWindow>
+#include <vector>
+#include <iostream>
+#include <fstream>
 
 #include "PolicyConfig.h"
 #include "setupdialog.h"
 #include "aboutdialog.h"
 
 using std::wstring;
+using std::vector;
+using std::ifstream;
 
 namespace Ui {
 class MainWindow;
@@ -30,10 +35,21 @@ private:
     HRESULT SetDevice(const wstring&);
     void SwitchToVrDevices();
     void SwtichToDesktopDevices();
+    QString ConvertString(wstring);
+    void GetAllAudioDevices();
+    void GetSavedAudioDevices();
+    vector<AudioDevice> playback_devices;
+    vector<AudioDevice> recording_devices;
     AudioDevice vr_playback_device;
     AudioDevice vr_recording_device;
     AudioDevice desktop_playback_device;
     AudioDevice desktop_recording_device;
+    QStringList playback_device_list;
+    QStringList recording_device_list;
+    string saved_vr_record_selection;
+    string saved_vr_playback_selection;
+    string saved_desktop_record_selection;
+    string saved_desktop_playback_selection;
 
 
 private slots:

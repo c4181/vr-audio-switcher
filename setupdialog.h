@@ -28,6 +28,7 @@ class SetupDialog : public QDialog
 public:
     explicit SetupDialog(QWidget *parent = nullptr);
     ~SetupDialog();
+    void PopulateAudioDevices(vector<AudioDevice> playback_devices, vector<AudioDevice> recording_devices, string saved_vr_playback, string saved_vr_record, string saved_desktop_playback, string saved_desktop_record);
     AudioDevice GetVrPlaybackDevice();
     AudioDevice GetVrRecordingDevice();
     AudioDevice GetDesktopPlaybackDevice();
@@ -35,18 +36,12 @@ public:
 
 private:
     Ui::SetupDialog *ui;
-    void ListAudioDevices();
     void ErrorFindingDevice(QString);
-    void SelectSavedDevices();
     vector<AudioDevice> playback_devices_;
     vector<AudioDevice> recording_devices_;
     QStringList playback_device_list_;
     QStringList recording_device_list_;
     QString ConvertString(wstring);
-    string saved_vr_record_selection;
-    string saved_vr_playback_selection;
-    string saved_desktop_record_selection;
-    string saved_desktop_playback_selection;
 
 private slots:
     void save_on_dialog_accept();

@@ -7,67 +7,10 @@ SetupDialog::SetupDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SetupDialog) {
     ui->setupUi(this);
-    ListAudioDevices();
-    ui->vr_playback_combo_box->addItems(playback_device_list_);
-    ui->desktop_playback_combo_box->addItems(playback_device_list_);
-    ui->vr_recording_combo_box->addItems(recording_device_list_);
-    ui->desktop_recording_combo_box->addItems(recording_device_list_);
-    SelectSavedDevices();
 }
 
 SetupDialog::~SetupDialog() {
     delete ui;
-}
-
-// Gets all active playback and recording devices and adds them to a QString List
-// to populate the Ui comboboxes
-void SetupDialog::ListAudioDevices() {
-    AudioManager audio_devices;
-    ifstream settings_file (SETTINGS_FILE_NAME);
-    string current_line;
-    vector<string> settings_buffer;
-
-    if(settings_file.is_open())
-    {
-        while (getline(settings_file, current_line))
-        {
-            settings_buffer.push_back(current_line);
-        }
-        settings_file.close();
-        for(ulong i=0;i<settings_buffer.size();++i)
-        {
-            if(settings_buffer[i] == "[vr_record]")
-            {
-                saved_vr_record_selection = settings_buffer[i+1];
-            }
-            if(settings_buffer[i] == "[vr_playback]")
-            {
-                saved_vr_playback_selection = settings_buffer[i+1];
-            }
-            if(settings_buffer[i] == "[desktop_record]")
-            {
-                saved_desktop_record_selection = settings_buffer[i+1];
-            }
-            if(settings_buffer[i] == "[desktop_playback]")
-            {
-                saved_desktop_playback_selection = settings_buffer[i+1];
-            }
-        }
-    }
-
-    playback_devices_ = audio_devices.GetPlaybackDevices();
-    recording_devices_ = audio_devices.GetRecordingDevices();
-
-    for(ulong i = 0; i < playback_devices_.size(); ++i) {
-        QString new_device = ConvertString(playback_devices_.at(i).deviceName);
-        playback_device_list_.append(new_device);
-    }
-
-    for(ulong i = 0; i < recording_devices_.size(); ++i) {
-        QString new_device = ConvertString(recording_devices_.at(i).deviceName);
-        recording_device_list_.append(new_device);
-    }
-
 }
 
 // Converts the PKEY_Device_Friendly_Name from a std::wstring
@@ -80,6 +23,63 @@ QString SetupDialog::ConvertString(wstring wdevice_name) {
     QString ret_qstring = QString::fromStdString(sdevice_name);
 
     return ret_qstring;
+}
+
+void SetupDialog::PopulateAudioDevices(vector<AudioDevice> playback_devices, vector<AudioDevice> recording_devices, string saved_vr_record, string saved_vr_playback, string saved_desktop_record, string saved_desktop_playback)
+{
+    //Turn the audio device vector's passed and turn them into QStringList's for the combo boxes
+    playback_devices_ = playback_devices;
+    recording_devices_ = recording_devices;
+
+    for(ulong i = 0; i < playback_devices_.size(); ++i) {
+        QString new_device = ConvertString(playback_devices_.at(i).deviceName);
+        playback_device_list_.append(new_device);
+    }
+
+    for(ulong i = 0; i < recording_devices_.size(); ++i) {
+        QString new_device = ConvertString(recording_devices_.at(i).deviceName);
+        recording_device_list_.append(new_device);
+    }
+
+    //Populate the combo boxes with the devices
+    ui->vr_playback_combo_box->addItems(playback_device_list_);
+    ui->desktop_playback_combo_box->addItems(playback_device_list_);
+    ui->vr_recording_combo_box->addItems(recording_device_list_);
+    ui->desktop_recording_combo_box->addItems(recording_device_list_);
+
+    //Select the saved devices if any were passed
+    if (!saved_vr_record.empty())
+    {
+        int index = ui->vr_recording_combo_box->findText(QString::fromStdString(saved_vr_record));
+        if(index != -1)
+        {
+            ui->vr_recording_combo_box->setCurrentIndex(index);
+        }
+    }
+    if (!saved_vr_playback.empty())
+    {
+        int index = ui->vr_playback_combo_box->findText(QString::fromStdString(saved_vr_playback));
+        if(index != -1)
+        {
+            ui->vr_playback_combo_box->setCurrentIndex(index);
+        }
+    }
+    if (!saved_desktop_record.empty())
+    {
+        int index = ui->desktop_recording_combo_box->findText(QString::fromStdString(saved_desktop_record));
+        if(index != -1)
+        {
+            ui->desktop_recording_combo_box->setCurrentIndex(index);
+        }
+    }
+    if (!saved_desktop_playback.empty())
+    {
+        int index = ui->desktop_playback_combo_box->findText(QString::fromStdString(saved_desktop_playback));
+        if(index != -1)
+        {
+            ui->desktop_playback_combo_box->setCurrentIndex(index);
+        }
+    }
 }
 
 AudioDevice SetupDialog::GetVrPlaybackDevice() {
@@ -137,41 +137,6 @@ AudioDevice SetupDialog::GetDesktopRecordingDevice() {
 void SetupDialog::ErrorFindingDevice(QString device) {
     QMessageBox::critical(this, "Error Finding Device", "Error: Could not find " + device, QMessageBox::Ok, QMessageBox::Ok);
     QCoreApplication::exit(1);
-}
-
-void SetupDialog::SelectSavedDevices() {
-    if (!saved_vr_record_selection.empty())
-    {
-        int index = ui->vr_recording_combo_box->findText(QString::fromStdString(saved_vr_record_selection));
-        if(index != -1)
-        {
-            ui->vr_recording_combo_box->setCurrentIndex(index);
-        }
-    }
-    if (!saved_vr_playback_selection.empty())
-    {
-        int index = ui->vr_playback_combo_box->findText(QString::fromStdString(saved_vr_playback_selection));
-        if(index != -1)
-        {
-            ui->vr_playback_combo_box->setCurrentIndex(index);
-        }
-    }
-    if (!saved_desktop_record_selection.empty())
-    {
-        int index = ui->desktop_recording_combo_box->findText(QString::fromStdString(saved_desktop_record_selection));
-        if(index != -1)
-        {
-            ui->desktop_recording_combo_box->setCurrentIndex(index);
-        }
-    }
-    if (!saved_desktop_playback_selection.empty())
-    {
-        int index = ui->desktop_playback_combo_box->findText(QString::fromStdString(saved_desktop_playback_selection));
-        if(index != -1)
-        {
-            ui->desktop_playback_combo_box->setCurrentIndex(index);
-        }
-    }
 }
 
 void SetupDialog::save_on_dialog_accept() {
