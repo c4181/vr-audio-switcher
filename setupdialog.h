@@ -2,16 +2,16 @@
 #define SETUPDIALOG_H
 
 #include <QDialog>
+#include <QMessageBox>
 #include <QStringList>
 #include <QString>
 #include <string>
 
-#include <map>
+#include "audiomanager.h"
 
-#include "audiohandler.h"
-
-using std::map;
 using std::string;
+using std::wstring;
+using std::vector;
 
 namespace Ui {
 class SetupDialog;
@@ -24,12 +24,20 @@ class SetupDialog : public QDialog
 public:
     explicit SetupDialog(QWidget *parent = nullptr);
     ~SetupDialog();
+    AudioDevice GetVrPlaybackDevice();
+    AudioDevice GetVrRecordingDevice();
+    AudioDevice GetDesktopPlaybackDevice();
+    AudioDevice GetDesktopRecordingDevice();
 
 private:
-    void ListAudioDevices();
     Ui::SetupDialog *ui;
-    map<string, string> audio_device_map_;
-    QStringList audio_device_list_;
+    void ListAudioDevices();
+    void ErrorFindingDevice(QString);
+    vector<AudioDevice> playback_devices_;
+    vector<AudioDevice> recording_devices_;
+    QStringList playback_device_list_;
+    QStringList recording_device_list_;
+    QString ConvertString(wstring);
 };
 
 #endif // SETUPDIALOG_H

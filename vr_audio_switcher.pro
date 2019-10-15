@@ -25,17 +25,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        audiohandler.cpp \
+        aboutdialog.cpp \
+        audiomanager.cpp \
         main.cpp \
         mainwindow.cpp \
         setupdialog.cpp
 
 HEADERS += \
-        audiohandler.h \
+        PolicyConfig.h \
+        aboutdialog.h \
+        audiomanager.h \
         mainwindow.h \
         setupdialog.h
 
 FORMS += \
+        aboutdialog.ui \
         mainwindow.ui \
         setupdialog.ui
 
@@ -43,3 +47,11 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    Resources/VR_Audio_Switcher_Large.png \
+    Resources/VR_Audio_Switcher_No_Text.png \
+    Resources/VR_Audio_Switcher_small.png
+
+RESOURCES += \
+    resources.qrc
